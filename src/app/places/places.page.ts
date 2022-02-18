@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Place } from './place.model';
 import { PlacesService } from './places.service';
 
@@ -11,10 +12,17 @@ export class PlacesPage implements OnInit {
 
   places: Place[] = []
   
-  constructor( private placesService: PlacesService ) { }
+  constructor( private placesService: PlacesService, private router: Router ) { }
 
   ngOnInit() {
     this.places = this.placesService.getPlaces();
   }
 
+  ionViewWillEnter() {
+    this.places = this.placesService.getPlaces();
+  }
+
+  addNewPlace(){
+    this.router.navigate(['/add-place']);
+  }
 }
